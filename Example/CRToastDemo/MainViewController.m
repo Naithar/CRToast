@@ -201,6 +201,15 @@ CRToastAccessoryViewAlignment CRToastViewAlignmentForSegmentedControl(UISegmente
         options[kCRToastImageKey] = [UIImage imageNamed:@"alert_icon.png"];
         options[kCRToastImageAlignmentKey] = @(CRToastViewAlignmentForSegmentedControl(self.imageAlignmentSegmentedControl));
     }
+
+    if (self.useAttributedText.on) {
+        options[kCRToastAttributedTextKey] = [[NSAttributedString alloc]
+                                              initWithString:@"attributed"
+                                              attributes:@{
+                                                           NSFontAttributeName : [UIFont boldSystemFontOfSize:18],
+                                                           NSForegroundColorAttributeName : [UIColor redColor],
+                                                           }];
+    }
     
     if (self.showActivityIndicatorSwitch.on) {
         options[kCRToastShowActivityIndicatorKey] = @YES;
