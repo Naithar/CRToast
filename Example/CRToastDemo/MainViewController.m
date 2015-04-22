@@ -44,6 +44,8 @@
 
 @property (assign, nonatomic) NSTextAlignment textAlignment;
 
+@property (strong, nonatomic) IBOutlet UISwitch *useAttributedText;
+
 @end
 
 @implementation MainViewController

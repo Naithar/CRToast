@@ -221,6 +221,11 @@ extern NSString *const kCRToastAnimationGravityMagnitudeKey;
 extern NSString *const kCRToastTextKey;
 
 /**
+ The attributed main text to be shown in the notification. Expects type `NSAttributedString`.
+ */
+extern NSString *const kCRToastAttributedTextKey;
+
+/**
  The font to be used for the `kCRToastTextKey` value . Expects type `UIFont`.
  */
 extern NSString *const kCRToastFontKey;
@@ -406,6 +411,7 @@ extern NSString *const kCRToastCaptureDefaultWindowKey;
 @property (nonatomic, readonly) CGFloat animationGravityMagnitude;
 
 @property (nonatomic, readonly) NSString *text;
+@property (nonatomic, readonly) NSAttributedString *attributedText;
 @property (nonatomic, readonly) UIFont *font;
 @property (nonatomic, readonly) UIColor *textColor;
 @property (nonatomic, readonly) NSTextAlignment textAlignment;

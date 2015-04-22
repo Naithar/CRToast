@@ -195,6 +195,7 @@ NSString *const kCRToastAnimationSpringInitialVelocityKey   = @"kCRToastAnimateS
 NSString *const kCRToastAnimationGravityMagnitudeKey        = @"kCRToastAnimationGravityMagnitudeKey";
 
 NSString *const kCRToastTextKey                             = @"kCRToastTextKey";
+NSString *const kCRToastAttributedTextKey                   = @"kCRToastAttributedTextKey";
 NSString *const kCRToastFontKey                             = @"kCRToastFontKey";
 NSString *const kCRToastTextColorKey                        = @"kCRToastTextColorKey";
 NSString *const kCRToastTextAlignmentKey                    = @"kCRToastTextAlignmentKey";
@@ -355,7 +356,8 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
                                 
                                 kCRToastAutorotateKey                       : NSStringFromClass([@(kCRAutoRotateDefault) class]),
                                 
-                                kCRToastCaptureDefaultWindowKey             : NSStringFromClass([@(kCRCaptureDefaultWindowDefault) class])
+                                kCRToastCaptureDefaultWindowKey             : NSStringFromClass([@(kCRCaptureDefaultWindowDefault) class]),
+                                kCRToastAttributedTextKey : NSStringFromClass([NSAttributedString class])
                                 };
     }
 }
@@ -610,6 +612,10 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
 
 - (NSString*)text {
     return _options[kCRToastTextKey] ?: kCRTextDefault;
+}
+
+- (NSAttributedString *)attributedText {
+    return _options[kCRToastAttributedTextKey];
 }
 
 - (UIFont*)font {

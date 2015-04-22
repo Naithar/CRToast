@@ -204,6 +204,11 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
     _label.numberOfLines = toast.textMaxNumberOfLines;
     _label.shadowOffset = toast.textShadowOffset;
     _label.shadowColor = toast.textShadowColor;
+
+    if (toast.attributedText != nil) {
+        _label.attributedText = toast.attributedText;
+    }
+    
     if (toast.subtitleText != nil) {
         _subtitleLabel.text = toast.subtitleText;
         _subtitleLabel.font = toast.subtitleFont;
