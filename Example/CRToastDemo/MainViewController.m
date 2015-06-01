@@ -232,7 +232,6 @@ CRToastAccessoryViewAlignment CRToastViewAlignmentForSegmentedControl(UISegmente
             options[kCRToastAttributedSubtitleTextKey] = [[NSAttributedString alloc]
                                                   initWithString:self.txtSubtitleMessage.text
                                                   attributes:@{
-                                                               NSFontAttributeName : [UIFont boldSystemFontOfSize:18],
                                                                NSForegroundColorAttributeName : [UIColor redColor],
                                                                }];
         }
