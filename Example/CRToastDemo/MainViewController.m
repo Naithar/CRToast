@@ -203,8 +203,14 @@ CRToastAccessoryViewAlignment CRToastViewAlignmentForSegmentedControl(UISegmente
     }
 
     if (self.useAttributedText.on) {
+        NSString *text = self.txtNotificationMessage.text;
+        
+        if (!text) {
+            text = @"text";
+        }
+        
         options[kCRToastAttributedTextKey] = [[NSAttributedString alloc]
-                                              initWithString:(self.txtNotificationMessage.text ?: @"text")
+                                              initWithString:text
                                               attributes:@{
                                                            NSFontAttributeName : [UIFont boldSystemFontOfSize:18],
                                                            NSForegroundColorAttributeName : [UIColor redColor],
