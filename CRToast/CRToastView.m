@@ -218,6 +218,11 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
         _subtitleLabel.shadowOffset = toast.subtitleTextShadowOffset;
         _subtitleLabel.shadowColor = toast.subtitleTextShadowColor;
     }
+    
+    if (toast.attributedSubtitleText != nil) {
+        _subtitleLabel.attributedText = toast.attributedSubtitleText;
+    }
+    
     _imageView.image = toast.image;
     _imageView.contentMode = toast.imageContentMode;
     _activityIndicator.activityIndicatorViewStyle = toast.activityIndicatorViewStyle;

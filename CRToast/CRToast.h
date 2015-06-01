@@ -261,6 +261,11 @@ extern NSString *const kCRToastTextMaxNumberOfLinesKey;
 extern NSString *const kCRToastSubtitleTextKey;
 
 /**
+ The attributed subtitle text to be shown in the notification. Expects type `NSAttributedString`.
+ */
+extern NSString *const kCRToastAttributedSubtitleTextKey;
+
+/**
  The font to be used for the `kCRToastSubtitleTextKey` value . Expects type `UIFont`.
  */
 extern NSString *const kCRToastSubtitleFontKey;
@@ -420,6 +425,7 @@ extern NSString *const kCRToastCaptureDefaultWindowKey;
 @property (nonatomic, readonly) NSInteger textMaxNumberOfLines;
 
 @property (nonatomic, readonly) NSString *subtitleText;
+@property (nonatomic, readonly) NSAttributedString *attributedSubtitleText;
 @property (nonatomic, readonly) UIFont *subtitleFont;
 @property (nonatomic, readonly) UIColor *subtitleTextColor;
 @property (nonatomic, readonly) NSTextAlignment subtitleTextAlignment;

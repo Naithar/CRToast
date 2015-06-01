@@ -204,7 +204,7 @@ CRToastAccessoryViewAlignment CRToastViewAlignmentForSegmentedControl(UISegmente
 
     if (self.useAttributedText.on) {
         options[kCRToastAttributedTextKey] = [[NSAttributedString alloc]
-                                              initWithString:@"attributed"
+                                              initWithString:(self.txtNotificationMessage.text ?: @"text")
                                               attributes:@{
                                                            NSFontAttributeName : [UIFont boldSystemFontOfSize:18],
                                                            NSForegroundColorAttributeName : [UIColor redColor],
@@ -227,6 +227,15 @@ CRToastAccessoryViewAlignment CRToastViewAlignmentForSegmentedControl(UISegmente
     if (![self.txtSubtitleMessage.text isEqualToString:@""]) {
         options[kCRToastSubtitleTextKey] = self.txtSubtitleMessage.text;
         options[kCRToastSubtitleTextAlignmentKey] = @(self.subtitleAlignment);
+        
+        if (self.useAttributedText.on) {
+            options[kCRToastAttributedSubtitleTextKey] = [[NSAttributedString alloc]
+                                                  initWithString:self.txtSubtitleMessage.text
+                                                  attributes:@{
+                                                               NSFontAttributeName : [UIFont boldSystemFontOfSize:18],
+                                                               NSForegroundColorAttributeName : [UIColor redColor],
+                                                               }];
+        }
     }
     
     if (_dismissibleWithTapSwitch.on) {

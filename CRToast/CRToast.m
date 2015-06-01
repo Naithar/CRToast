@@ -204,6 +204,7 @@ NSString *const kCRToastTextShadowOffsetKey                 = @"kCRToastTextShad
 NSString *const kCRToastTextMaxNumberOfLinesKey             = @"kCRToastTextMaxNumberOfLinesKey";
 
 NSString *const kCRToastSubtitleTextKey                     = @"kCRToastSubtitleTextKey";
+NSString *const kCRToastAttributedSubtitleTextKey           = @"kCRToastAttributedSubtitleTextKey";
 NSString *const kCRToastSubtitleFontKey                     = @"kCRToastSubtitleFontKey";
 NSString *const kCRToastSubtitleTextColorKey                = @"kCRToastSubtitleTextColorKey";
 NSString *const kCRToastSubtitleTextAlignmentKey            = @"kCRToastSubtitleTextAlignmentKey";
@@ -357,7 +358,8 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
                                 kCRToastAutorotateKey                       : NSStringFromClass([@(kCRAutoRotateDefault) class]),
                                 
                                 kCRToastCaptureDefaultWindowKey             : NSStringFromClass([@(kCRCaptureDefaultWindowDefault) class]),
-                                kCRToastAttributedTextKey : NSStringFromClass([NSAttributedString class])
+                                kCRToastAttributedTextKey                   : NSStringFromClass([NSAttributedString class]),
+                                kCRToastAttributedSubtitleTextKey           : NSStringFromClass([NSAttributedString class])
                                 };
     }
 }
@@ -614,8 +616,12 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
     return _options[kCRToastTextKey] ?: kCRTextDefault;
 }
 
-- (NSAttributedString *)attributedText {
+- (NSAttributedString*)attributedText {
     return _options[kCRToastAttributedTextKey];
+}
+
+- (NSAttributedString*)attributedSubtitleText {
+    return _options[kCRToastAttributedSubtitleTextKey];
 }
 
 - (UIFont*)font {
