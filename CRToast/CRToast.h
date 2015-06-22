@@ -316,6 +316,11 @@ extern NSString *const kCRToastBackgroundViewKey;
 extern NSString *const kCRToastImageKey;
 
 /**
+ The left image view size to use. Expects type CGSize.
+ */
+extern NSString *const kCRToastImageSizeKey;
+
+/**
  The image content mode to use for `kCRToastImageKey` image. Exptects type `UIViewContentMode`
  */
 extern NSString *const kCRToastImageContentModeKey;
@@ -437,6 +442,7 @@ extern NSString *const kCRToastCaptureDefaultWindowKey;
 @property (nonatomic, readonly) UIView *backgroundView;
 @property (nonatomic, readonly) UIImage *image;
 @property (nonatomic, readonly) UIViewContentMode imageContentMode;
+@property (nonatomic, readonly) CGSize leftImageSize;
 @property (nonatomic, readonly) CRToastAccessoryViewAlignment imageAlignment;
 @property (nonatomic, readonly) UIActivityIndicatorViewStyle activityIndicatorViewStyle;
 @property (nonatomic, readonly) CRToastAccessoryViewAlignment activityViewAlignment;

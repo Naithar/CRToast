@@ -216,6 +216,7 @@ NSString *const kCRToastStatusBarStyleKey                   = @"kCRToastStatusBa
 NSString *const kCRToastBackgroundColorKey                  = @"kCRToastBackgroundColorKey";
 NSString *const kCRToastBackgroundViewKey                   = @"kCRToastBackgroundViewKey";
 NSString *const kCRToastImageKey                            = @"kCRToastImageKey";
+NSString *const kCRToastImageSizeKey                        = @"kCRToastImageSizeKey";
 NSString *const kCRToastImageContentModeKey                 = @"kCRToastImageContentModeKey";
 NSString *const kCRToastImageAlignmentKey                   = @"kCRToastImageAlignmentKey";
 NSString *const kCRToastShowActivityIndicatorKey            = @"kCRToastShowActivityIndicatorKey";
@@ -359,7 +360,8 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
                                 
                                 kCRToastCaptureDefaultWindowKey             : NSStringFromClass([@(kCRCaptureDefaultWindowDefault) class]),
                                 kCRToastAttributedTextKey                   : NSStringFromClass([NSAttributedString class]),
-                                kCRToastAttributedSubtitleTextKey           : NSStringFromClass([NSAttributedString class])
+                                kCRToastAttributedSubtitleTextKey           : NSStringFromClass([NSAttributedString class]),
+                                kCRToastImageSizeKey                        : NSStringFromClass([NSValue class])
                                 };
     }
 }
@@ -686,6 +688,10 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
 
 - (UIViewContentMode)imageContentMode {
     return _options[kCRToastImageContentModeKey] ? [_options[kCRToastImageContentModeKey] integerValue] : kCRImageContentModeDefault;
+}
+
+- (CGSize)leftImageSize {
+    return _options[kCRToastImageSizeKey] ? [_options[kCRToastImageSizeKey] CGSizeValue] : CGSizeZero;
 }
 
 - (CRToastAccessoryViewAlignment)imageAlignment {

@@ -127,15 +127,21 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
     
     self.backgroundView.frame = self.bounds;
     
+    CGSize toastLeftImageSize = self.toast.leftImageSize;
+    
     CGFloat imageXOffset = CRImageViewFrameXOffsetForAlignment(self.toast.imageAlignment, contentFrame.size);
     self.imageView.frame = CGRectMake(imageXOffset,
                                       statusBarYOffset,
                                       imageSize.width == 0 ?
                                       0 :
-                                      CGRectGetHeight(contentFrame),
+                                      toastLeftImageSize.width == 0 ?
+                                      CGRectGetHeight(contentFrame)
+                                      : toastLeftImageSize.width,
                                       imageSize.height == 0 ?
                                       0 :
-                                      CGRectGetHeight(contentFrame));
+                                      toastLeftImageSize.height == 0
+                                      ? CGRectGetHeight(contentFrame)
+                                      : toastLeftImageSize.height);
     
     CGFloat imageWidth = imageSize.width == 0 ? 0 : CGRectGetMaxX(_imageView.frame);
     CGFloat x = CRContentXOffsetForViewAlignmentAndWidth(self.toast.imageAlignment, imageWidth);

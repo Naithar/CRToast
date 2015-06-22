@@ -351,7 +351,7 @@
 						TestTargetID = 5E2FFB5218367C01003333F8;
 					};
 					5E2FFB5218367C01003333F8 = {
-						DevelopmentTeam = 7AM27DZVQU;
+						DevelopmentTeam = P5Q8AK6HKQ;
 					};
 				};
 			};
