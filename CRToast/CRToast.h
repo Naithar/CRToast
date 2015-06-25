@@ -335,6 +335,33 @@ extern NSString *const kCRToastImageInsetKey;
  */
 extern NSString *const kCRToastImageContentModeKey;
 
+
+/**
+ The image to be shown on the left side of the notification. Expects type `UIImage`.
+ */
+extern NSString *const kCRToastRightImageKey;
+
+/**
+ The left image view size to use. Expects type CGSize.
+ */
+extern NSString *const kCRToastRightImageSizeKey;
+
+/**
+ The left image corner radius. Expects type CGFloat.
+ */
+extern NSString *const kCRToastRightImageCornerRadiusKey;
+
+/**
+ The left image inset. Expects type UIEdgeInset.
+ */
+extern NSString *const kCRToastRightImageInsetKey;
+
+/**
+ The image content mode to use for `kCRToastImageKey` image. Exptects type `UIViewContentMode`
+ */
+extern NSString *const kCRToastRightImageContentModeKey;
+
+
 /**
  The image alignment to use. Expects type `CRToastAccessoryViewAlignment`.
  */
@@ -455,6 +482,14 @@ extern NSString *const kCRToastCaptureDefaultWindowKey;
 @property (nonatomic, readonly) CGSize leftImageSize;
 @property (nonatomic, readonly) CGFloat leftImageCornerRadius;
 @property (nonatomic, readonly) UIEdgeInsets leftImageInsets;
+
+@property (nonatomic, readonly) UIImage *rightImage;
+@property (nonatomic, readonly) UIViewContentMode rightImageContentMode;
+@property (nonatomic, readonly) CGSize rightImageSize;
+@property (nonatomic, readonly) CGFloat rightImageCornerRadius;
+@property (nonatomic, readonly) UIEdgeInsets rightImageInsets;
+
+
 @property (nonatomic, readonly) CRToastAccessoryViewAlignment imageAlignment;
 @property (nonatomic, readonly) UIActivityIndicatorViewStyle activityIndicatorViewStyle;
 @property (nonatomic, readonly) CRToastAccessoryViewAlignment activityViewAlignment;

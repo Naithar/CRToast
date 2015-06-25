@@ -201,10 +201,16 @@ CRToastAccessoryViewAlignment CRToastViewAlignmentForSegmentedControl(UISegmente
                                       kCRToastImageContentModeKey : @(UIViewContentModeScaleToFill),
                                       kCRToastImageCornerRadiusKey : @(20),
                                       kCRToastImageInsetKey : [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 15, 0, 15)],
+                                      
+                                      kCRToastRightImageSizeKey : [NSValue valueWithCGSize:CGSizeMake(35, 35)],
+                                      kCRToastRightImageContentModeKey : @(UIViewContentModeScaleToFill),
+                                      kCRToastRightImageCornerRadiusKey : @(20),
+                                      kCRToastRightImageInsetKey : [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 15, 0, 15)],
                                       } mutableCopy];
     if (self.showImageSwitch.on) {
         options[kCRToastImageKey] = [UIImage imageNamed:@"alert_icon.png"];
-        options[kCRToastImageAlignmentKey] = @(CRToastViewAlignmentForSegmentedControl(self.imageAlignmentSegmentedControl));
+        
+        options[kCRToastRightImageKey] = [UIImage imageNamed:@"alert_icon.png"];
     }
 
     if (self.useAttributedText.on) {

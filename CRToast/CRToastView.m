@@ -95,7 +95,13 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
         imageView.userInteractionEnabled = NO;
         imageView.contentMode = UIViewContentModeCenter;
         [self addSubview:imageView];
-        self.imageView = imageView;
+        self.leftImageView = imageView;
+        
+        UIImageView *rightImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+        rightImageView.userInteractionEnabled = NO;
+        rightImageView.contentMode = UIViewContentModeCenter;
+        [self addSubview:rightImageView];
+        self.rightImageView = rightImageView;
         
         UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
         activityIndicator.userInteractionEnabled = NO;
@@ -120,7 +126,7 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
 - (void)layoutSubviews {
     [super layoutSubviews];
     CGRect contentFrame = self.bounds;
-    CGSize imageSize = self.imageView.image.size;
+    CGSize imageSize = self.leftImageView.image.size;
     
     CGFloat statusBarYOffset = self.toast.displayUnderStatusBar ? (CRGetStatusBarHeight()+CRStatusBarViewUnderStatusBarYOffsetAdjustment) : 0;
     contentFrame.size.height = CGRectGetHeight(contentFrame) - statusBarYOffset;
@@ -129,7 +135,7 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
     
     CGSize toastLeftImageSize = self.toast.leftImageSize;
     
-    CGFloat imageXOffset = CRImageViewFrameXOffsetForAlignment(self.toast.imageAlignment, contentFrame.size);
+//    CGFloat imageXOffset = CRImageViewFrameXOffsetForAlignment(self.toast.imageAlignment, contentFrame.size);
     
     CGSize imageViewSize = CGSizeMake(imageSize.width == 0 ?
                                       0 :
@@ -143,21 +149,54 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
     
     UIEdgeInsets imageViewInset = self.toast.leftImageInsets;
     
-    CGPoint imageViewPosition = CGPointMake(imageXOffset + imageViewInset.left,
+    CGPoint imageViewPosition = CGPointMake(imageViewInset.left,
                                             contentFrame.size.height / 2 - imageViewSize.height / 2 + imageViewInset.top - imageViewInset.bottom);
     
-    self.imageView.frame = CGRectMake(imageViewPosition.x,
+    self.leftImageView.frame = CGRectMake(imageViewPosition.x,
                                       imageViewPosition.y,
                                       imageViewSize.width,
                                       imageViewSize.height);
     
     CGFloat leftImageCornerRadius = self.toast.leftImageCornerRadius;
     
-    self.imageView.layer.cornerRadius = leftImageCornerRadius;
-    self.imageView.clipsToBounds = leftImageCornerRadius != 0;
+    self.leftImageView.layer.cornerRadius = leftImageCornerRadius;
+    self.leftImageView.clipsToBounds = leftImageCornerRadius != 0;
     
-    CGFloat imageWidth = imageSize.width == 0 ? 0 : CGRectGetMaxX(_imageView.frame);
-    CGFloat x = CRContentXOffsetForViewAlignmentAndWidth(self.toast.imageAlignment, imageWidth) + imageViewInset.right;
+    
+    //right
+    CGSize toastRightImageSize = self.toast.rightImageSize;
+    CGSize rightImageSize = self.rightImageView.image.size;
+    
+    CGSize rightImageViewSize = CGSizeMake(rightImageSize.width == 0 ?
+                                           0 :
+                                           toastRightImageSize.width == 0 ?
+                                           CGRectGetHeight(contentFrame)
+                                           : toastRightImageSize.width, rightImageSize.height == 0 ?
+                                           0 :
+                                           toastRightImageSize.height == 0
+                                           ? CGRectGetHeight(contentFrame)
+                                           : toastRightImageSize.height);
+    
+    UIEdgeInsets rightImageInset = self.toast.rightImageInsets;
+    
+    CGPoint rightImageViewPosition = CGPointMake(CGRectGetWidth(contentFrame) - rightImageViewSize.width - rightImageInset.right,
+                                                 contentFrame.size.height / 2 - rightImageViewSize.height / 2 + rightImageInset.top - rightImageInset.bottom);
+    
+    self.rightImageView.frame = CGRectMake(rightImageViewPosition.x,
+                                           rightImageViewPosition.y,
+                                           rightImageViewSize.width,
+                                           rightImageViewSize.height);
+    
+    CGFloat rightImageCornerRadius = self.toast.rightImageCornerRadius;
+    
+    self.rightImageView.layer.cornerRadius = rightImageCornerRadius;
+    self.rightImageView.clipsToBounds = rightImageCornerRadius != 0;
+    
+    CGFloat rightImageViewOffsetValue = (rightImageViewSize.width + rightImageInset.left + rightImageInset.right);
+    
+    CGFloat imageWidth = imageSize.width == 0 ? 0 : CGRectGetMaxX(_leftImageView.frame);
+    CGFloat x = imageWidth + imageViewInset.right;
+    
     
     if (self.toast.showActivityIndicator) {
         CGFloat centerX = CRCenterXForActivityIndicatorWithAlignment(self.toast.activityViewAlignment, CGRectGetHeight(contentFrame), CGRectGetWidth(contentFrame));
@@ -178,6 +217,8 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
                                                                   self.toast.imageAlignment,
                                                                   self.toast.showActivityIndicator,
                                                                   self.toast.activityViewAlignment);
+    
+    width -= rightImageViewOffsetValue;
     
     if (self.toast.subtitleText == nil) {
         self.label.frame = CGRectMake(x,
@@ -201,13 +242,13 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
         
         self.label.frame = CGRectMake(x,
                                       offset+statusBarYOffset,
-                                      CGRectGetWidth(contentFrame)-x-kCRStatusBarViewNoImageRightContentInset,
+                                      CGRectGetWidth(contentFrame)-x-rightImageViewOffsetValue,
                                       height);
         
         
         self.subtitleLabel.frame = CGRectMake(x,
                                               height+offset+statusBarYOffset,
-                                              CGRectGetWidth(contentFrame)-x-kCRStatusBarViewNoImageRightContentInset,
+                                              CGRectGetWidth(contentFrame)-x-rightImageViewOffsetValue,
                                               subtitleHeight);
     }
 }
@@ -242,9 +283,15 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
         _subtitleLabel.attributedText = toast.attributedSubtitleText;
     }
     
-    _imageView.image = toast.image;
-    _imageView.contentMode = toast.imageContentMode;
+    _leftImageView.image = toast.image;
+    _leftImageView.contentMode = toast.imageContentMode;
+    
+    _rightImageView.image = toast.rightImage;
+    _rightImageView.contentMode = toast.rightImageContentMode;
+    
+    
     _activityIndicator.activityIndicatorViewStyle = toast.activityIndicatorViewStyle;
+    
     self.backgroundColor = toast.backgroundColor;
     
     if (toast.backgroundView) {

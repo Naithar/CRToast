@@ -33,9 +33,9 @@ CRToast * __TestToast(void) {
     
     [self.view layoutSubviews];
     
-    BOOL rectsEqual = CGRectEqualToRect(assumedRect, self.view.imageView.frame);
+    BOOL rectsEqual = CGRectEqualToRect(assumedRect, self.view.leftImageView.frame);
     
-    XCTAssertTrue(rectsEqual, @"left aligned rect should be equal to assumed rect. Intead was %@", NSStringFromCGRect(self.view.imageView.frame));
+    XCTAssertTrue(rectsEqual, @"left aligned rect should be equal to assumed rect. Intead was %@", NSStringFromCGRect(self.view.leftImageView.frame));
 }
 
 - (void)testImageFrameCenterAlignment {
@@ -52,9 +52,9 @@ CRToast * __TestToast(void) {
     
     [self.view layoutSubviews];
     
-    BOOL rectsEqual = CGRectEqualToRect(assumedRect, self.view.imageView.frame);
+    BOOL rectsEqual = CGRectEqualToRect(assumedRect, self.view.leftImageView.frame);
     
-    XCTAssertTrue(rectsEqual, @"center aligned rect should be equal to assumed rect. Intead was %@", NSStringFromCGRect(self.view.imageView.frame));
+    XCTAssertTrue(rectsEqual, @"center aligned rect should be equal to assumed rect. Intead was %@", NSStringFromCGRect(self.view.leftImageView.frame));
 }
 
 - (void)testImageFrameRightAlignment {
@@ -71,9 +71,9 @@ CRToast * __TestToast(void) {
  
     [self.view layoutSubviews];
     
-    BOOL rectsEqual = CGRectEqualToRect(assumedRect, self.view.imageView.frame);
+    BOOL rectsEqual = CGRectEqualToRect(assumedRect, self.view.leftImageView.frame);
     
-    XCTAssertTrue(rectsEqual, @"right aligned rect should be equal to assumed rect. Intead was %@", NSStringFromCGRect(self.view.imageView.frame));
+    XCTAssertTrue(rectsEqual, @"right aligned rect should be equal to assumed rect. Intead was %@", NSStringFromCGRect(self.view.leftImageView.frame));
 }
 
 #pragma mark Activity Indicator Alignment

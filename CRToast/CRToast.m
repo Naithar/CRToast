@@ -215,13 +215,22 @@ NSString *const kCRToastStatusBarStyleKey                   = @"kCRToastStatusBa
 
 NSString *const kCRToastBackgroundColorKey                  = @"kCRToastBackgroundColorKey";
 NSString *const kCRToastBackgroundViewKey                   = @"kCRToastBackgroundViewKey";
+
 NSString *const kCRToastImageKey                            = @"kCRToastImageKey";
 NSString *const kCRToastImageSizeKey                        = @"kCRToastImageSizeKey";
 NSString *const kCRToastImageCornerRadiusKey                = @"kCRToastImageCornerRadiusKey";
 NSString *const kCRToastImageInsetKey                       = @"kCRToastImageInsetKey";
-
 NSString *const kCRToastImageContentModeKey                 = @"kCRToastImageContentModeKey";
+
+
+NSString *const kCRToastRightImageKey                       = @"kCRToastRightImageKey";
+NSString *const kCRToastRightImageSizeKey                   = @"kCRToastRightImageSizeKey";
+NSString *const kCRToastRightImageCornerRadiusKey           = @"kCRToastRightImageCornerRadiusKey";
+NSString *const kCRToastRightImageInsetKey                  = @"kCRToastRightImageInsetKey";
+NSString *const kCRToastRightImageContentModeKey            = @"kCRToastRightImageContentModeKey";
+
 NSString *const kCRToastImageAlignmentKey                   = @"kCRToastImageAlignmentKey";
+
 NSString *const kCRToastShowActivityIndicatorKey            = @"kCRToastShowActivityIndicatorKey";
 NSString *const kCRToastActivityIndicatorViewStyleKey       = @"kCRToastActivityIndicatorViewStyleKey";
 NSString *const kCRToastActivityIndicatorAlignmentKey       = @"kCRToastActivityIndicatorAlignmentKey";
@@ -366,7 +375,13 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
                                 kCRToastAttributedSubtitleTextKey           : NSStringFromClass([NSAttributedString class]),
                                 kCRToastImageSizeKey                        : NSStringFromClass([NSValue class]),
                                 kCRToastImageCornerRadiusKey                : NSStringFromClass([NSNumber class]),
-                                kCRToastImageInsetKey                       : NSStringFromClass([NSValue class])
+                                kCRToastImageInsetKey                       : NSStringFromClass([NSValue class]),
+                                
+                                kCRToastRightImageKey                       : NSStringFromClass([UIImage class]),
+                                kCRToastRightImageSizeKey                   : NSStringFromClass([NSValue class]),
+                                kCRToastRightImageCornerRadiusKey           : NSStringFromClass([NSNumber class]),
+                                kCRToastRightImageInsetKey                  : NSStringFromClass([NSValue class]),
+                                kCRToastRightImageContentModeKey            : NSStringFromClass([@(kCRImageContentModeDefault) class]),
                                 };
     }
 }
@@ -706,6 +721,27 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
 - (UIEdgeInsets)leftImageInsets {
     return _options[kCRToastImageInsetKey] ? [_options[kCRToastImageInsetKey] UIEdgeInsetsValue] : UIEdgeInsetsZero;
 }
+
+- (UIImage *)rightImage {
+    return _options[kCRToastRightImageKey];
+}
+
+- (UIViewContentMode)rightImageContentMode {
+    return _options[kCRToastRightImageContentModeKey] ? [_options[kCRToastRightImageContentModeKey] integerValue] : UIViewContentModeCenter;
+}
+
+- (CGSize)rightImageSize {
+    return _options[kCRToastRightImageSizeKey] ? [_options[kCRToastRightImageSizeKey] CGSizeValue] : CGSizeZero;
+}
+
+- (CGFloat)rightImageCornerRadius {
+    return _options[kCRToastRightImageCornerRadiusKey] ? [_options[kCRToastRightImageCornerRadiusKey] floatValue] : 0;
+}
+
+- (UIEdgeInsets)rightImageInsets {
+    return _options[kCRToastRightImageInsetKey] ? [_options[kCRToastRightImageInsetKey] UIEdgeInsetsValue] : UIEdgeInsetsZero;
+}
+
 
 - (CRToastAccessoryViewAlignment)imageAlignment {
     return _options[kCRToastImageAlignmentKey] ? [_options[kCRToastImageAlignmentKey] integerValue] : kCRImageAlignmentDefault;
