@@ -130,21 +130,34 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
     CGSize toastLeftImageSize = self.toast.leftImageSize;
     
     CGFloat imageXOffset = CRImageViewFrameXOffsetForAlignment(self.toast.imageAlignment, contentFrame.size);
-    self.imageView.frame = CGRectMake(imageXOffset,
-                                      statusBarYOffset,
-                                      imageSize.width == 0 ?
+    
+    CGSize imageViewSize = CGSizeMake(imageSize.width == 0 ?
                                       0 :
                                       toastLeftImageSize.width == 0 ?
                                       CGRectGetHeight(contentFrame)
-                                      : toastLeftImageSize.width,
-                                      imageSize.height == 0 ?
+                                      : toastLeftImageSize.width, imageSize.height == 0 ?
                                       0 :
                                       toastLeftImageSize.height == 0
                                       ? CGRectGetHeight(contentFrame)
                                       : toastLeftImageSize.height);
     
+    UIEdgeInsets imageViewInset = self.toast.leftImageInsets;
+    
+    CGPoint imageViewPosition = CGPointMake(imageXOffset + imageViewInset.left,
+                                            contentFrame.size.height / 2 - imageViewSize.height / 2 + imageViewInset.top - imageViewInset.bottom);
+    
+    self.imageView.frame = CGRectMake(imageViewPosition.x,
+                                      imageViewPosition.y,
+                                      imageViewSize.width,
+                                      imageViewSize.height);
+    
+    CGFloat leftImageCornerRadius = self.toast.leftImageCornerRadius;
+    
+    self.imageView.layer.cornerRadius = leftImageCornerRadius;
+    self.imageView.clipsToBounds = leftImageCornerRadius != 0;
+    
     CGFloat imageWidth = imageSize.width == 0 ? 0 : CGRectGetMaxX(_imageView.frame);
-    CGFloat x = CRContentXOffsetForViewAlignmentAndWidth(self.toast.imageAlignment, imageWidth);
+    CGFloat x = CRContentXOffsetForViewAlignmentAndWidth(self.toast.imageAlignment, imageWidth) + imageViewInset.right;
     
     if (self.toast.showActivityIndicator) {
         CGFloat centerX = CRCenterXForActivityIndicatorWithAlignment(self.toast.activityViewAlignment, CGRectGetHeight(contentFrame), CGRectGetWidth(contentFrame));

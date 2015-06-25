@@ -217,6 +217,9 @@ NSString *const kCRToastBackgroundColorKey                  = @"kCRToastBackgrou
 NSString *const kCRToastBackgroundViewKey                   = @"kCRToastBackgroundViewKey";
 NSString *const kCRToastImageKey                            = @"kCRToastImageKey";
 NSString *const kCRToastImageSizeKey                        = @"kCRToastImageSizeKey";
+NSString *const kCRToastImageCornerRadiusKey                = @"kCRToastImageCornerRadiusKey";
+NSString *const kCRToastImageInsetKey                       = @"kCRToastImageInsetKey";
+
 NSString *const kCRToastImageContentModeKey                 = @"kCRToastImageContentModeKey";
 NSString *const kCRToastImageAlignmentKey                   = @"kCRToastImageAlignmentKey";
 NSString *const kCRToastShowActivityIndicatorKey            = @"kCRToastShowActivityIndicatorKey";
@@ -361,7 +364,9 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
                                 kCRToastCaptureDefaultWindowKey             : NSStringFromClass([@(kCRCaptureDefaultWindowDefault) class]),
                                 kCRToastAttributedTextKey                   : NSStringFromClass([NSAttributedString class]),
                                 kCRToastAttributedSubtitleTextKey           : NSStringFromClass([NSAttributedString class]),
-                                kCRToastImageSizeKey                        : NSStringFromClass([NSValue class])
+                                kCRToastImageSizeKey                        : NSStringFromClass([NSValue class]),
+                                kCRToastImageCornerRadiusKey                : NSStringFromClass([NSNumber class]),
+                                kCRToastImageInsetKey                       : NSStringFromClass([NSValue class])
                                 };
     }
 }
@@ -692,6 +697,14 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
 
 - (CGSize)leftImageSize {
     return _options[kCRToastImageSizeKey] ? [_options[kCRToastImageSizeKey] CGSizeValue] : CGSizeZero;
+}
+
+- (CGFloat)leftImageCornerRadius {
+    return _options[kCRToastImageCornerRadiusKey] ? [_options[kCRToastImageCornerRadiusKey] floatValue] : 0;
+}
+
+- (UIEdgeInsets)leftImageInsets {
+    return _options[kCRToastImageInsetKey] ? [_options[kCRToastImageInsetKey] UIEdgeInsetsValue] : UIEdgeInsetsZero;
 }
 
 - (CRToastAccessoryViewAlignment)imageAlignment {

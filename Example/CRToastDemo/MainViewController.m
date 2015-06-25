@@ -197,6 +197,10 @@ CRToastAccessoryViewAlignment CRToastViewAlignmentForSegmentedControl(UISegmente
                                       kCRToastAnimationOutTypeKey               : @(CRToastAnimationTypeFromSegmentedControl(_outAnimationTypeSegmentedControl)),
                                       kCRToastAnimationInDirectionKey           : @(self.segFromDirection.selectedSegmentIndex),
                                       kCRToastAnimationOutDirectionKey          : @(self.segToDirection.selectedSegmentIndex),
+                                      kCRToastImageSizeKey : [NSValue valueWithCGSize:CGSizeMake(35, 35)],
+                                      kCRToastImageContentModeKey : @(UIViewContentModeScaleToFill),
+                                      kCRToastImageCornerRadiusKey : @(20),
+                                      kCRToastImageInsetKey : [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 15, 0, 15)],
                                       } mutableCopy];
     if (self.showImageSwitch.on) {
         options[kCRToastImageKey] = [UIImage imageNamed:@"alert_icon.png"];

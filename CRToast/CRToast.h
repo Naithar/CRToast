@@ -321,6 +321,16 @@ extern NSString *const kCRToastImageKey;
 extern NSString *const kCRToastImageSizeKey;
 
 /**
+ The left image corner radius. Expects type CGFloat.
+ */
+extern NSString *const kCRToastImageCornerRadiusKey;
+
+/**
+ The left image inset. Expects type UIEdgeInset.
+ */
+extern NSString *const kCRToastImageInsetKey;
+
+/**
  The image content mode to use for `kCRToastImageKey` image. Exptects type `UIViewContentMode`
  */
 extern NSString *const kCRToastImageContentModeKey;
@@ -443,6 +453,8 @@ extern NSString *const kCRToastCaptureDefaultWindowKey;
 @property (nonatomic, readonly) UIImage *image;
 @property (nonatomic, readonly) UIViewContentMode imageContentMode;
 @property (nonatomic, readonly) CGSize leftImageSize;
+@property (nonatomic, readonly) CGFloat leftImageCornerRadius;
+@property (nonatomic, readonly) UIEdgeInsets leftImageInsets;
 @property (nonatomic, readonly) CRToastAccessoryViewAlignment imageAlignment;
 @property (nonatomic, readonly) UIActivityIndicatorViewStyle activityIndicatorViewStyle;
 @property (nonatomic, readonly) CRToastAccessoryViewAlignment activityViewAlignment;
