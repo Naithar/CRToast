@@ -519,6 +519,13 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
         [CRToastManager dismissNotification:YES];
     }
     
+    CGPoint location = [tapGestureRecognizer locationInView:tapGestureRecognizer.view];
+    if (!CGRectContainsPoint(tapGestureRecognizer.view.frame, location)
+        || location.x < (self.leftImageInsets.right + self.leftImageInsets.left + self.leftImageSize.width)
+        || location.x > (tapGestureRecognizer.view.frame.size.width - self.rightImageSize.width - self.rightImageInsets.right - self.rightImageInsets.left)) {
+        return;
+    }
+    
     if (tapGestureRecognizer.block) {
         tapGestureRecognizer.block(tapGestureRecognizer.interactionType);
     }
