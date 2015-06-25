@@ -383,7 +383,7 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
                                 kCRToastRightImageCornerRadiusKey           : NSStringFromClass([NSNumber class]),
                                 kCRToastRightImageInsetKey                  : NSStringFromClass([NSValue class]),
                                 kCRToastRightImageContentModeKey            : NSStringFromClass([@(kCRImageContentModeDefault) class]),
-                                kCRToastImageBlockKey                       : @"__NSGlobalBlock__",
+                                kCRToastImageBlockKey                       : @"NSBlock",
                                 };
     }
 }
