@@ -206,6 +206,12 @@ CRToastAccessoryViewAlignment CRToastViewAlignmentForSegmentedControl(UISegmente
                                       kCRToastRightImageContentModeKey : @(UIViewContentModeScaleToFill),
                                       kCRToastRightImageCornerRadiusKey : @(20),
                                       kCRToastRightImageInsetKey : [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 15, 0, 15)],
+                                      
+                                      kCRToastImageBlockKey : (^(UIImageView *imageView){
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            imageView.image = [UIImage imageNamed:@"teal_checkmark.png"];
+        });
+    }),
                                       } mutableCopy];
     if (self.showImageSwitch.on) {
         options[kCRToastImageKey] = [UIImage imageNamed:@"alert_icon.png"];

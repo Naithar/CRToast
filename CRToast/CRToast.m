@@ -222,6 +222,7 @@ NSString *const kCRToastImageCornerRadiusKey                = @"kCRToastImageCor
 NSString *const kCRToastImageInsetKey                       = @"kCRToastImageInsetKey";
 NSString *const kCRToastImageContentModeKey                 = @"kCRToastImageContentModeKey";
 
+NSString *const kCRToastImageBlockKey                       = @"kCRToastImageBlockKey";
 
 NSString *const kCRToastRightImageKey                       = @"kCRToastRightImageKey";
 NSString *const kCRToastRightImageSizeKey                   = @"kCRToastRightImageSizeKey";
@@ -382,6 +383,7 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
                                 kCRToastRightImageCornerRadiusKey           : NSStringFromClass([NSNumber class]),
                                 kCRToastRightImageInsetKey                  : NSStringFromClass([NSValue class]),
                                 kCRToastRightImageContentModeKey            : NSStringFromClass([@(kCRImageContentModeDefault) class]),
+                                kCRToastImageBlockKey                       : @"__NSGlobalBlock__",
                                 };
     }
 }
@@ -708,6 +710,10 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
 
 - (UIViewContentMode)imageContentMode {
     return _options[kCRToastImageContentModeKey] ? [_options[kCRToastImageContentModeKey] integerValue] : kCRImageContentModeDefault;
+}
+
+- (CRToastImageBlock)imageBlock {
+    return _options[kCRToastImageBlockKey];
 }
 
 - (CGSize)leftImageSize {

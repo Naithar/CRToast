@@ -162,7 +162,6 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
     self.leftImageView.layer.cornerRadius = leftImageCornerRadius;
     self.leftImageView.clipsToBounds = leftImageCornerRadius != 0;
     
-    
     //right
     CGSize toastRightImageSize = self.toast.rightImageSize;
     CGSize rightImageSize = self.rightImageView.image.size;
@@ -285,6 +284,10 @@ static CGFloat CRCenterXForActivityIndicatorWithAlignment(CRToastAccessoryViewAl
     
     _leftImageView.image = toast.image;
     _leftImageView.contentMode = toast.imageContentMode;
+    
+    if (toast.imageBlock) {
+        toast.imageBlock(_leftImageView);
+    }
     
     _rightImageView.image = toast.rightImage;
     _rightImageView.contentMode = toast.rightImageContentMode;

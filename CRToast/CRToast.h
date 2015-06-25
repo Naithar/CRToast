@@ -7,6 +7,8 @@
 #import "CRToastManager.h"
 @import UIKit;
 
+typedef void (^CRToastImageBlock)(UIImageView*);
+
 @class CRToastSwipeGestureRecognizer, CRToastTapGestureRecognizer;
 
 /**
@@ -335,6 +337,11 @@ extern NSString *const kCRToastImageInsetKey;
  */
 extern NSString *const kCRToastImageContentModeKey;
 
+/**
+ The block that is used to set image for left toast image view. Exptects type `CRToastImageBlock`
+ */
+extern NSString *const kCRToastImageBlockKey;
+
 
 /**
  The image to be shown on the left side of the notification. Expects type `UIImage`.
@@ -482,6 +489,7 @@ extern NSString *const kCRToastCaptureDefaultWindowKey;
 @property (nonatomic, readonly) CGSize leftImageSize;
 @property (nonatomic, readonly) CGFloat leftImageCornerRadius;
 @property (nonatomic, readonly) UIEdgeInsets leftImageInsets;
+@property (nonatomic, readonly) CRToastImageBlock imageBlock;
 
 @property (nonatomic, readonly) UIImage *rightImage;
 @property (nonatomic, readonly) UIViewContentMode rightImageContentMode;
