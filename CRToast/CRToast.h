@@ -9,6 +9,14 @@
 
 typedef void (^CRToastImageBlock)(UIImageView*);
 
+@interface CRToastImageBlockContainer : NSObject
+
+@property (nonatomic, copy) CRToastImageBlock block;
+
+- (instancetype)initWithBlock:(CRToastImageBlock)block;
+- (void)performWith:(UIImageView*)imageView;
+@end
+
 @class CRToastSwipeGestureRecognizer, CRToastTapGestureRecognizer;
 
 /**
@@ -104,7 +112,7 @@ typedef NS_ENUM(NSInteger, CRToastAnimationType) {
 };
 
 /**
-  `CRToastState` defines the current state of the CRToast. Used for internal state management in the manager 
+ `CRToastState` defines the current state of the CRToast. Used for internal state management in the manager
  */
 typedef NS_ENUM(NSInteger, CRToastState){
     CRToastStateWaiting,
@@ -160,7 +168,7 @@ extern NSString *const kCRToastUnderStatusBarKey;
  improved when the toast is within the border. Customized bars without the border
  should have this set to NO.
  Expects type `BOOL`. Defaults to YES.
-*/
+ */
 extern NSString *const kCRToastKeepNavigationBarBorderKey;
 
 /**
@@ -309,7 +317,7 @@ extern NSString *const kCRToastBackgroundColorKey;
 
 /**
  Custom view used as the background of the notification
-*/
+ */
 extern NSString *const kCRToastBackgroundViewKey;
 
 /**

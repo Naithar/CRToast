@@ -35,6 +35,26 @@ NSString *NSStringFromCRToastInteractionType(CRToastInteractionType interactionT
     return nil;
 }
 
+@implementation CRToastImageBlockContainer
+
+- (instancetype)initWithBlock:(CRToastImageBlock)block {
+    self = [super init];
+    
+    if (self) {
+        _block = block;
+    }
+    
+    return self;
+}
+
+- (void)performWith:(UIImageView*)imageView {
+    if (self.block) {
+        self.block(imageView);
+    }
+}
+
+@end
+
 typedef void (^CRToastInteractionResponderBlock) (CRToastInteractionType interactionType);
 
 @interface CRToastSwipeGestureRecognizer : UISwipeGestureRecognizer
@@ -167,7 +187,7 @@ NSArray * CRToastGenericRecognizersMake(id target, CRToastInteractionResponder *
 // device is running iOS 8 or later, in order to pass Travis CI. Can be removed
 // once Travis CI is updated to support Xcode 6 and iOS 8 SDK.
 #ifndef NSFoundationVersionNumber_iOS_7_1
-	#define NSFoundationVersionNumber_iOS_7_1 1047.25
+#define NSFoundationVersionNumber_iOS_7_1 1047.25
 #endif
 
 #pragma mark - CRToast
@@ -383,7 +403,7 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
                                 kCRToastRightImageCornerRadiusKey           : NSStringFromClass([NSNumber class]),
                                 kCRToastRightImageInsetKey                  : NSStringFromClass([NSValue class]),
                                 kCRToastRightImageContentModeKey            : NSStringFromClass([@(kCRImageContentModeDefault) class]),
-                                kCRToastImageBlockKey                       : @"NSBlock",
+                                kCRToastImageBlockKey                       : NSStringFromClass([CRToastImageBlockContainer class]),
                                 };
     }
 }
@@ -395,7 +415,7 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
     notification.state = CRToastStateWaiting;
     notification.uuid = [NSUUID UUID];
     notification.appearance = appearance;
-	
+    
     return notification;
 }
 
@@ -450,9 +470,9 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
     
     if (defaultOptions[kCRToastInteractionRespondersKey])           kCRInteractionResponders                = defaultOptions[kCRToastInteractionRespondersKey];
     if (defaultOptions[kCRToastForceUserInteractionKey])            kCRForceUserInteractionDefault          = [defaultOptions[kCRToastForceUserInteractionKey] boolValue];
-        
+    
     if (defaultOptions[kCRToastAutorotateKey])                      kCRAutoRotateDefault                    = [defaultOptions[kCRToastAutorotateKey] boolValue];
-
+    
     if (defaultOptions[kCRToastCaptureDefaultWindowKey])            kCRCaptureDefaultWindowDefault          = [defaultOptions[kCRToastCaptureDefaultWindowKey] boolValue];
 }
 
@@ -515,6 +535,8 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
 }
 
 - (void)tapGestureRecognizerTapped:(CRToastTapGestureRecognizer*)tapGestureRecognizer {
+    
+    
     if (tapGestureRecognizer.automaticallyDismiss) {
         [CRToastManager dismissNotification:YES];
     }
@@ -720,7 +742,7 @@ static NSDictionary *                kCRToastKeyClassMap                    = ni
 }
 
 - (CRToastImageBlock)imageBlock {
-    return _options[kCRToastImageBlockKey];
+    return _options[kCRToastImageBlockKey] ? ((CRToastImageBlockContainer*)_options[kCRToastImageBlockKey]).block : nil;
 }
 
 - (CGSize)leftImageSize {
